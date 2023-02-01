@@ -3,7 +3,8 @@ import { RESTDataSource } from "@apollo/datasource-rest";
 class BookstoreAPI extends RESTDataSource {
     constructor(options) {
         super(options);
-        this.baseURL = 'https://johns-bookstore-server.herokuapp.com/'
+        this.baseURL = 'http://localhost:1234'
+        // 'https://johns-bookstore-server.herokuapp.com/'
         this.token = '2'
     };
 
@@ -41,8 +42,8 @@ class BookstoreAPI extends RESTDataSource {
 
     async addAuthor(authorName, countryOfBirth, birthDate, isDead) {
         try {
-            let createdAuthor = await this.post(`authors?author-name=${authorName}&country-of-birth=${countryOfBirth}&birth-date=${birthDate}&isDead=${isDead}`);
-            return createdAuthor
+            let responseBody = await this.post(`authors?author-name=${authorName}&country-of-birth=${countryOfBirth}&birth-date=${birthDate}&isDead=${isDead}`);
+            return responseBody
         } catch (err) {
             console.log(err)
         }

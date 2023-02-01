@@ -36,8 +36,10 @@ const resolvers = {
             const response = await dataSources.bookstoreAPI.getBookById(bookId);
             return response.book;
         },
-        getAuthorById: (_, { authorId }, { dataSources }) => {
-            return dataSources.bookstoreAPI.getAuthorById(authorId)
+        getAuthorById: async (_, { authorId }, { dataSources }) => {
+            const response = await dataSources.bookstoreAPI.getAuthorById(authorId)
+            const { author } = response;
+            return parseAuthor(author)
         },
         getBooksByAuthorId: (_, { authorId }, { dataSources }) => {
             return dataSources.bookstoreAPI.getBooksByAuthorId(authorId);
@@ -117,7 +119,8 @@ const resolvers = {
         addAuthor: async (_, { author }, { dataSources }) => {
             const { authorName, countryOfBirth, birthDate, isDead } = author;
             try {
-                let author = await dataSources.bookstoreAPI.addAuthor(authorName, countryOfBirth, birthDate, isDead);
+                const response = await dataSources.bookstoreAPI.addAuthor(authorName, countryOfBirth, birthDate, isDead);
+                const { author } = response;
                 return parseAuthor(author);
             } catch (err) {
                 console.log(err)
@@ -125,8 +128,9 @@ const resolvers = {
         },
         updateAuthorName: async (_, { authorId, newAuthorName }, { dataSources }) => {
             try {
-                let updatedAuthor = await dataSources.bookstoreAPI.updateAuthorName(authorId, newAuthorName);
-                return parseAuthor(updatedAuthor);
+                const responseBody = await dataSources.bookstoreAPI.updateAuthorName(authorId, newAuthorName);
+                const { author } = responseBody;
+                return parseAuthor(author);
             } catch (err) {
                 console.log(err)
             }
