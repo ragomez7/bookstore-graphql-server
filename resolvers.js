@@ -33,12 +33,13 @@ const resolvers = {
             return responseBody;
         },
         getBookById: async (_, { bookId }, { dataSources }) => {
-            const response = await dataSources.bookstoreAPI.getBookById(bookId);
-            return response.book;
+            const responseBody = await dataSources.bookstoreAPI.getBookById(bookId);
+            const { book } = responseBody
+            return parseBook(book);
         },
         getAuthorById: async (_, { authorId }, { dataSources }) => {
-            const response = await dataSources.bookstoreAPI.getAuthorById(authorId)
-            const { author } = response;
+            const responseBody = await dataSources.bookstoreAPI.getAuthorById(authorId)
+            const { author } = responseBody;
             return parseAuthor(author)
         },
         getBooksByAuthorId: (_, { authorId }, { dataSources }) => {
@@ -65,7 +66,8 @@ const resolvers = {
         },
         getReaderById: async (_, { readerId }, { dataSources }) => {
             try {
-                const reader = await dataSources.bookstoreAPI.getReaderById(readerId);
+                const responseBody = await dataSources.bookstoreAPI.getReaderById(readerId);
+                const { reader } = responseBody;
                 return {
                     code: 200,
                     success: true,
@@ -119,8 +121,8 @@ const resolvers = {
         addAuthor: async (_, { author }, { dataSources }) => {
             const { authorName, countryOfBirth, birthDate, isDead } = author;
             try {
-                const response = await dataSources.bookstoreAPI.addAuthor(authorName, countryOfBirth, birthDate, isDead);
-                const { author } = response;
+                const responseBody = await dataSources.bookstoreAPI.addAuthor(authorName, countryOfBirth, birthDate, isDead);
+                const { author } = responseBody;
                 return parseAuthor(author);
             } catch (err) {
                 console.log(err)
@@ -152,13 +154,15 @@ const resolvers = {
             return await dataSources.bookstoreAPI.deleteBookById(bookId);
         },
         addReader: async (_, { readerName, readerAge, readerEmail }, { dataSources}) => {
-            return await dataSources.bookstoreAPI.addReader(readerName, readerAge, readerEmail);
+            const responseBody = await dataSources.bookstoreAPI.addReader(readerName, readerAge, readerEmail);
+            return responseBody.reader;
         },
         deleteReader: async (_, { readerId }, { dataSources }) => {
             return await dataSources.bookstoreAPI.deleteReader(readerId)
         },
         updateReaderName: async (_, { readerId, newReaderName }, { dataSources }) => {
-            return await dataSources.bookstoreAPI.updateReaderName(readerId, newReaderName)
+            const responseBody = await dataSources.bookstoreAPI.updateReaderName(readerId, newReaderName)
+            return responseBody.reader;
         },
         addReaderToBook: async (_, { readerId, bookId }, { dataSources }) => {
             return await dataSources.bookstoreAPI.addReaderToBook(readerId, bookId);
