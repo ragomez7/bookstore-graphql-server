@@ -174,7 +174,9 @@ const resolvers = {
     Book: {
         author: async ({ author_id }, _, { dataSources }) => {
             try {
-                const author = await dataSources.bookstoreAPI.getAuthorById(author_id);
+                const responseBody = await dataSources.bookstoreAPI.getAuthorById(author_id);
+                const author = responseBody.author;
+                console.log(parseAuthor(author))
                 return parseAuthor(author)
             } catch (err) {
                 console.log(err);
