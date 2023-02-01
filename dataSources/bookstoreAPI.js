@@ -36,7 +36,7 @@ class BookstoreAPI extends RESTDataSource {
     async addBook(bookTitle, authorId, pageCount, bookThumbnail) {
         pageCount = pageCount || "null";
         bookThumbnail = bookThumbnail || "null";
-        return this.post(`books?book-title=${bookTitle}&author-id=${authorId}`);
+        return this.post(`books?book-title=${bookTitle}&author-id=${authorId}&page-count=${pageCount}&book-thumbnail${bookThumbnail}`);
     }
 
     async addAuthor(authorName, countryOfBirth, birthDate, isDead) {

@@ -110,6 +110,11 @@ const typeDefs = `#graphql
         authors: [Author]!
         authorsCount: Int!
     }
+
+    type GetBookResponse {
+        book: Book
+    }
+
     "Accepts relevant response fields + the requested array of books"
     type GetBooksResponse {
         books: [Book]!

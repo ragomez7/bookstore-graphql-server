@@ -32,8 +32,9 @@ const resolvers = {
             }
             return responseBody;
         },
-        getBookById: (_, { bookId }, { dataSources }) => {
-            return dataSources.bookstoreAPI.getBookById(bookId)
+        getBookById: async (_, { bookId }, { dataSources }) => {
+            const response = await dataSources.bookstoreAPI.getBookById(bookId);
+            return response.book;
         },
         getAuthorById: (_, { authorId }, { dataSources }) => {
             return dataSources.bookstoreAPI.getAuthorById(authorId)
@@ -139,7 +140,8 @@ const resolvers = {
             }
         },
         updateBookTitle: async (_, { bookId, newBookTitle }, { dataSources }) => {
-            const updatedBook = await dataSources.bookstoreAPI.updateBookTitle(bookId, newBookTitle);
+            const updatedBookResponse = await dataSources.bookstoreAPI.updateBookTitle(bookId, newBookTitle);
+            const updatedBook = updatedBookResponse.book;
             return parseBook(updatedBook)
         },
         deleteBookById: async (_, { bookId }, { dataSources }) => {
