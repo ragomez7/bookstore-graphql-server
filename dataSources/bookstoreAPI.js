@@ -3,8 +3,8 @@ import { RESTDataSource } from "@apollo/datasource-rest";
 class BookstoreAPI extends RESTDataSource {
     constructor(options) {
         super(options);
-        this.baseURL = 'http://localhost:1234'
-        // 'https://johns-bookstore-server.herokuapp.com/'
+        this.baseURL = 'https://johns-bookstore-server.herokuapp.com/'
+        // 
         this.token = '2'
     };
 
