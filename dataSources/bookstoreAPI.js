@@ -4,7 +4,7 @@ class BookstoreAPI extends RESTDataSource {
     constructor(options) {
         super(options);
         this.baseURL = 'https://johns-bookstore-server.herokuapp.com/'
-        // 
+        // 'https://johns-bookstore-server.herokuapp.com/'
         this.token = '2'
     };
 
