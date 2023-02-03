@@ -2,8 +2,8 @@
 * This graph interacts with John's Bookstore REST API, being able to do all its available requests.
 
 ## Access and Authentication
-* Access the Apollo Server's Graph and interact with the REST API by [clicking here](https://shorturl.at/ghix4).
-* Query the Apollo Server directly by [clicking here](https://shorturl.at/AMU23).
+* Access the Apollo Server's Graph and interact with the REST API by [clicking here](https://studio.apollographql.com/graph/johns-bookstore-graph-5vul3/home?variant=current).
+* Query the Apollo Server directly by [clicking here](https://johns-bookstore-graphql-server.herokuapp.com/).
 * The graph is totally open.
 
 ## Available operations
